@@ -2,9 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}To-Do App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <header>
+        <h1>To-Do List Application</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('tasks.task_list') }}">Tasks</a></li>
+                <li><a href="{{ url_for('tasks.add_task') }}">Add Task</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        {% block content %}
+        <!-- 각 템플릿에서 이 영역에 콘텐츠를 삽입합니다. -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 To-Do App. All rights reserved.</p>
+    </footer>
 </body>
 </html>

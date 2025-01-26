@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+Add Task - To-Do App
+{% endblock %}
+
+{% block content %}
+<h2>Add a New Task</h2>
+<form method="POST">
+    {{ form.hidden_tag() }} <!-- CSRF 보호 -->
+    <div>
+        {{ form.title.label }}<br>
+        {{ form.title(size=30) }}
+    </div>
+    <div>
+        {{ form.description.label }}<br>
+        {{ form.description(rows=3) }}
+    </div>
+    <div>
+        {{ form.category.label }}<br>
+        {{ form.category(size=20) }}
+    </div>
+    <div>
+        {{ form.priority.label }}<br>
+        {{ form.priority(min=1, max=5) }}
+    </div>
+    <div>
+        {{ form.deadline.label }}<br>
+        {{ form.deadline() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}

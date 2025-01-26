@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from models import todo_db
 from routes.task_routes import task_bp
 
@@ -18,6 +18,10 @@ def create_app():
 
     # 작업(Task) 관련 라우트를 블루프린트로 등록
     app.register_blueprint(task_bp, url_prefix='/tasks')
+
+    @app.route('/')
+    def home():
+        return render_template('home.html')
 
     return app
 

@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+Edit Task - To-Do App
+{% endblock %}
+
+{% block content %}
+<h2>Edit Task</h2>
+<form method="POST" action="{{ url_for('tasks.edit_task', task_id=task.id) }}">
+    {{ form.hidden_tag() }}
+    <div>
+        <label>Title</label>
+        {{ form.title(class="form-control") }}
+        {% if form.title.errors %}
+            <small class="error">{{ form.title.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        <label>Description</label>
+        {{ form.description(class="form-control") }}
+        {% if form.description.errors %}
+            <small class="error">{{ form.description.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        <label>Category</label>
+        {{ form.category(class="form-control") }}
+        {% if form.category.errors %}
+            <small class="error">{{ form.category.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        <label>Priority</label>
+        {{ form.priority(class="form-control") }}
+        {% if form.priority.errors %}
+            <small class="error">{{ form.priority.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        <label>Deadline</label>
+        {{ form.deadline(class="form-control") }}
+        {% if form.deadline.errors %}
+            <small class="error">{{ form.deadline.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{{ url_for('tasks.task_list') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}

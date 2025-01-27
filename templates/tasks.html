@@ -5,11 +5,22 @@ Tasks - To-Do App
 {% endblock %}
 
 {% block content %}
-<h2>Your Task List</h2>
-<ul>
+<h2>오늘의 할일</h2>
+
+<!-- 할일 목록 -->
+<ul style="padding: 0; list-style: none;">
     {% for task in tasks %}
-        <li>{{ task.title }} - {{ task.status }}</li>
+        <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #ddd;">
+            <strong>{{ task.title }}</strong> - <span style="color: #555;">{{ task.status }}</span>
+
+            <!-- 삭제 버튼 -->
+            <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="post" style="display:inline;">
+                <button type="submit" class="delete-btn" onclick="return confirm('정말로 삭제하겠습니까?')">삭제하기</button>
+            </form>
+        </li>
     {% endfor %}
 </ul>
-<a href="{{ url_for('tasks.add_task') }}">Add New Task</a>
+
+<!-- 할일 추가 버튼 -->
+<a href="{{ url_for('tasks.add_task') }}" class="add-btn">할일 추가 하기</a>
 {% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+회원가입 - To-Do App
+{% endblock %}
+
+{% block content %}
+<h2>회원가입</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.username.label }}
+        {{ form.username(class="form-control") }}
+        {% if form.username.errors %}
+            <small class="error">{{ form.username.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.email.label }}
+        {{ form.email(class="form-control") }}
+        {% if form.email.errors %}
+            <small class="error">{{ form.email.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.password.label }}
+        {{ form.password(class="form-control") }}
+        {% if form.password.errors %}
+            <small class="error">{{ form.password.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password(class="form-control") }}
+        {% if form.confirm_password.errors %}
+            <small class="error">{{ form.confirm_password.errors[0] }}</small>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+{% endblock %}

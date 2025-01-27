@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template
 from models import todo_db
 from routes.task_routes import task_bp
+from routes.auth_routes import auth_bp, login_manager
 
 def create_app():
     """
@@ -12,17 +13,18 @@ def create_app():
     app = Flask(__name__)
     # config.py 파일의 Config 클래스를 로드하여 설정 적용
     app.config.from_object('config.Config')
-
     # SQLAlchemy 초기화: 데이터베이스와 Flask 애플리케이션을 연결
     todo_db.init_app(app)
 
-    # 작업(Task) 관련 라우트를 블루프린트로 등록
-    app.register_blueprint(task_bp, url_prefix='/tasks')
+    # Flask-Login 초기화
+    login_manager.init_app(app)
 
+    # 블루프린트 등록
+    app.register_blueprint(task_bp, url_prefix='/tasks')
+    app.register_blueprint(auth_bp, url_prefix='/auth')
     @app.route('/')
     def home():
         return render_template('home.html')
-
     return app
 
 if __name__ == '__main__':

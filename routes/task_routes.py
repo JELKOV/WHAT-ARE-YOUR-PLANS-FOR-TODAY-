@@ -55,3 +55,12 @@ def edit_task(task_id):
         todo_db.session.commit()             # 데이터베이스에 변경 사항 저장
         return redirect(url_for('tasks.task_list'))  # 작업 목록 페이지로 리다이렉트
     return render_template('edit_task.html', form=form, task=task)  # edit_task.html 템플릿 렌더링
+
+# 작업을 삭제하는 라우트
+@task_bp.route('/delete/<int:task_id>', methods=['POST'])
+def delete_task(task_id):
+
+    task = Task.query.get_or_404(task_id) # 작업 ID로 작업을 조회 , 없으면 404 에러 반환
+    todo_db.session.delete(task) # 선택된 작업을 삭제
+    todo_db.session.commit()  # db에 변경사항 저장
+    return redirect(url_for('tasks.task_list')) # 작업 목록 페이지로 리로드

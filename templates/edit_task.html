@@ -9,35 +9,35 @@ Edit Task - To-Do App
 <form method="POST" action="{{ url_for('tasks.edit_task', task_id=task.id) }}">
     {{ form.hidden_tag() }}
     <div>
-        <label>Title</label>
-        {{ form.title(class="form-control") }}
+        {{ form.title.label }}
+        {{ form.title(size=30, class="form-control") }}
         {% if form.title.errors %}
             <small class="error">{{ form.title.errors[0] }}</small>
         {% endif %}
     </div>
     <div>
-        <label>Description</label>
-        {{ form.description(class="form-control") }}
+        {{ form.description.label }}
+        {{ form.description(rows=3, class="form-control") }}
         {% if form.description.errors %}
             <small class="error">{{ form.description.errors[0] }}</small>
         {% endif %}
     </div>
     <div>
-        <label>Category</label>
-        {{ form.category(class="form-control") }}
+        {{ form.category.label }}
+        {{ form.category(size=20, class="form-control") }}
         {% if form.category.errors %}
             <small class="error">{{ form.category.errors[0] }}</small>
         {% endif %}
     </div>
     <div>
-        <label>Priority</label>
-        {{ form.priority(class="form-control") }}
+        {{ form.priority.label }}
+        {{ form.priority(min=1, max=5, class="form-control") }}
         {% if form.priority.errors %}
             <small class="error">{{ form.priority.errors[0] }}</small>
         {% endif %}
     </div>
     <div>
-        <label>Deadline</label>
+        {{ form.deadline.label }}
         {{ form.deadline(class="form-control") }}
         {% if form.deadline.errors %}
             <small class="error">{{ form.deadline.errors[0] }}</small>

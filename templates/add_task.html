@@ -9,27 +9,27 @@ Add Task - To-Do App
 <form method="POST">
     {{ form.hidden_tag() }} <!-- CSRF 보호 -->
     <div>
-        {{ form.title.label }}<br>
-        {{ form.title(size=30) }}
+        {{ form.title.label }}
+        {{ form.title(size=50) }} <!-- 입력 필드 크기 조정 -->
     </div>
     <div>
-        {{ form.description.label }}<br>
-        {{ form.description(rows=3) }}
+        {{ form.description.label }}
+        {{ form.description(rows=5) }} <!-- 텍스트 영역 크기 증가 -->
     </div>
     <div>
-        {{ form.category.label }}<br>
-        {{ form.category(size=20) }}
+        {{ form.category.label }}
+        {{ form.category(size=40) }}
     </div>
     <div>
-        {{ form.priority.label }}<br>
-        {{ form.priority(min=1, max=5) }}
+        {{ form.priority.label }}
+        {{ form.priority(min=1, max=10) }}
     </div>
     <div>
-        {{ form.deadline.label }}<br>
+        {{ form.deadline.label }}
         {{ form.deadline() }}
     </div>
     <div>
-        {{ form.submit() }}
+        {{ form.submit(class="btn btn-primary") }}
     </div>
 </form>
 {% endblock %}

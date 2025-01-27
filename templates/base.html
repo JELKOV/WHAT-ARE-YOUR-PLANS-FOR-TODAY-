@@ -8,13 +8,18 @@
 </head>
 <body>
     <header>
-        <h1>To-Do List Application</h1>
+        <h1>To-Do List 어플리케이션</h1>
         <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('tasks.task_list') }}">Tasks</a></li>
-                <li><a href="{{ url_for('tasks.add_task') }}">Add Task</a></li>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('home') }}">홈</a></li>
+                <li><a href="{{ url_for('tasks.task_list') }}">할일</a></li>
+                <li><a href="{{ url_for('tasks.add_task') }}">할일 추가하기</a></li>
             </ul>
+            <!-- 로그인/로그아웃 버튼 -->
+            <div class="auth-buttons">
+                <a href="{{ url_for('auth.login') }}" class="btn-login">로그인</a>
+                <a href="{{ url_for('auth.logout') }}" class="btn-logout">로그아웃</a>
+            </div>
         </nav>
     </header>
 

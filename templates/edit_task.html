@@ -43,6 +43,12 @@ Edit Task - To-Do App
             <small class="error">{{ form.deadline.errors[0] }}</small>
         {% endif %}
     </div>
+    <!-- ✅ 완료 여부 체크박스 추가 -->
+    <div class="form-check mt-3">
+        {{ form.completed(class="form-check-input") }}
+        {{ form.completed.label(class="form-check-label") }}
+    </div>
+
     <div class="d-flex justify-content-end gap-2 mt-4">
         <a href="{{ url_for('tasks.task_list') }}" class="btn btn-danger btn-lg">
             Cancel

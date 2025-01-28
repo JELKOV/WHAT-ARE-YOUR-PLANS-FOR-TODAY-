@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField, DateField, SubmitField
+from wtforms import StringField, TextAreaField, IntegerField, DateField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Optional
 
 class TaskForm(FlaskForm):
@@ -16,5 +16,7 @@ class TaskForm(FlaskForm):
     priority = IntegerField('우선순위(기본값은 1)', validators=[Optional()])
     # 마감일 필드: 선택 입력 (YYYY-MM-DD 형식의 날짜)
     deadline = DateField('마감기일', format='%Y-%m-%d', validators=[Optional()])
+    # 완료 여부
+    completed = BooleanField('완료 여부')  # ✅ 추가
     # 저장 버튼
     submit = SubmitField('저장 하기')

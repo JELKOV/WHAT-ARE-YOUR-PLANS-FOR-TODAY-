@@ -21,3 +21,5 @@ class Task(todo_db.Model):
     deadline = todo_db.Column(todo_db.DateTime, nullable=True)
     # 작업 상태: 기본값은 'pending'
     status = todo_db.Column(todo_db.String(20), default='pending')
+    # ✅ 완료 여부 추가
+    completed = todo_db.Column(todo_db.Boolean, default=False)

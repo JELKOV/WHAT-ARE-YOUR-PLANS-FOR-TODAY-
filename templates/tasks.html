@@ -7,20 +7,34 @@ Tasks - To-Do App
 {% block content %}
 <h2>오늘의 할일</h2>
 
-<!-- 할일 목록 -->
-<ul style="padding: 0; list-style: none;">
-    {% for task in tasks %}
-        <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #ddd;">
-            <strong>{{ task.title }}</strong> - <span style="color: #555;">{{ task.status }}</span>
+<!-- 날짜 선택 -->
+<div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+    <span style="font-size: 1.1em; font-weight: bold;">오늘: {{ current_date }}</span>
+    <button class="date-btn" onclick="alert('날짜 선택 기능은 구현 중입니다!')">날짜 선택</button>
+</div>
 
-            <!-- 삭제 버튼 -->
-            <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="post" style="display:inline;">
-                <button type="submit" class="delete-btn" onclick="return confirm('정말로 삭제하겠습니까?')">삭제하기</button>
-            </form>
+<!-- 할일 목록 -->
+<ul>
+    {% for task in tasks %}
+        <li class="task-item">
+            <div class="task-info">
+                <strong>{{ task.title }}</strong>
+                <span class="task-status">{{ task.status }}</span>
+            </div>
+            <div class="task-actions">
+                <!-- 수정 버튼 -->
+                <form action="{{ url_for('tasks.edit_task', task_id=task.id) }}" method="get">
+                    <button type="submit" class="task-btn edit">수정</button>
+                </form>
+                <!-- 삭제 버튼 -->
+                <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="post">
+                    <button type="submit" class="task-btn delete" onclick="return confirm('정말로 삭제하겠습니까?')">삭제</button>
+                </form>
+            </div>
         </li>
     {% endfor %}
 </ul>
 
 <!-- 할일 추가 버튼 -->
-<a href="{{ url_for('tasks.add_task') }}" class="add-btn">할일 추가 하기</a>
+<a href="{{ url_for('tasks.add_task') }}" class="add-btn">할일 추가</a>
 {% endblock %}

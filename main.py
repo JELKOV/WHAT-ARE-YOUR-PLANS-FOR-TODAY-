@@ -36,12 +36,11 @@ if __name__ == '__main__':
 
     # 데이터베이스 파일 확인: 존재하지 않을 경우 새로 생성
     db_path = os.path.join('instance', 'app.db')
-    if not os.path.exists(db_path):
-        with app.app_context():
-            print("데이터 베이스 테이블 생성중...")
-            # 데이터베이스 테이블 생성
-            todo_db.create_all()
-            print("데이터 베이스 테이블 생성완료.")
+    with app.app_context():
+        print("데이터베이스 테이블 생성 중...")
+        todo_db.create_all()  # 모든 모델의 테이블 생성
+        print("데이터베이스 테이블 생성 완료.")
 
     # Flask 개발 서버 실행
     app.run(debug=True)
+

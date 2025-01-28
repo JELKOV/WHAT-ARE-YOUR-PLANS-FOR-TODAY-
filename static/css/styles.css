@@ -19,14 +19,8 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 2em;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    font-size: 1.5em; /* 텍스트 크기를 줄임 */
+    white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 .nav-menu {
@@ -45,13 +39,54 @@ nav {
 
 .nav-menu li a {
     color: white;
-    text-decoration: none;
+    text-decoration: none; /* 기본 밑줄 제거 */
     font-weight: bold;
 }
 
 .nav-menu li a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* hover 상태에서만 밑줄 */
 }
+
+
+/* 버튼 정렬 및 통일 */
+.d-flex {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    gap: 15px; /* 버튼 간 간격 */
+}
+
+.btn-lg {
+    font-size: 1.2rem; /* 버튼 텍스트 크기 */
+    padding: 12px 20px; /* 버튼 크기 조정 */
+    border-radius: 8px; /* 둥근 모서리 */
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Save Changes 버튼 색상 */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* Cancel 버튼 색상 */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
 
 /* 로그인/로그아웃 버튼 스타일 */
 .auth-buttons {
@@ -60,7 +95,11 @@ nav {
 }
 
 .auth-buttons .btn-login,
-.auth-buttons .btn-logout {
+.auth-buttons .btn-logout,
+.auth-buttons .btn-register,
+.auth-buttons .btn-home,
+.auth-buttons .btn-mytask,
+.auth-buttons .btn-add{
     background-color: #fff;
     color: #4CAF50;
     border: 1px solid #4CAF50;
@@ -73,7 +112,11 @@ nav {
 }
 
 .auth-buttons .btn-login:hover,
-.auth-buttons .btn-logout:hover {
+.auth-buttons .btn-logout:hover,
+.auth-buttons .btn-register:hover,
+.auth-buttons .btn-home:hover,
+.auth-buttons .btn-mytask:hover,
+.auth-buttons .btn-add:hover{
     background-color: #4CAF50;
     color: #fff;
 }
@@ -94,42 +137,79 @@ ul {
     padding: 0;
 }
 
-ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+ul li.task-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fefefe;
+    transition: box-shadow 0.3s ease;
 }
 
-ul li:last-child {
-    border-bottom: none;
+ul li.task-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 버튼 스타일 */
-button, .btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+/* 작업 정보 스타일 */
+.task-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.task-info strong {
     font-size: 1em;
-    width: auto;
+    color: #333;
 }
 
-/* 삭제 버튼 스타일 */
-.delete-btn {
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+.task-info .task-status {
     font-size: 0.9em;
-    transition: background-color 0.3s ease;
+    color: #555;
 }
 
-.delete-btn:hover {
-    background-color: #e63946;
+/* 작업 버튼 스타일 */
+.task-actions {
+    display: flex;
+    gap: 10px; /* 버튼 간격 */
+}
+
+/* 공통 버튼 스타일 */
+.task-btn {
+    display: inline-block;
+    padding: 5px 15px; /* 버튼 크기를 균일하게 조정 */
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 2px; /* 버튼 간의 간격 조정 */
+}
+
+/* 수정 버튼 */
+.task-btn.edit {
+    background-color: #4CAF50;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.task-btn.edit:hover {
+    background-color: #3e8e41; /* 더 어두운 녹색으로 변화 */
+    transform: scale(1.05); /* 살짝 커짐 */
+}
+
+/* 삭제 버튼 */
+.task-btn.delete {
+    background-color: #ff6b6b;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.task-btn.delete:hover {
+    background-color: #d9534f; /* 어두운 빨간색으로 변화 */
+    transform: scale(1.05); /* 살짝 커짐 */
 }
 
 /* 추가 버튼 스타일 */
@@ -138,15 +218,32 @@ button, .btn {
     background-color: #4CAF50;
     color: white;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 12px 20px;
     border-radius: 5px;
     font-weight: bold;
-    margin-top: 20px;
+    font-size: 1em;
     transition: background-color 0.3s ease;
 }
 
 .add-btn:hover {
     background-color: #45a049;
+}
+
+/* 날짜 선택 버튼 스타일 */
+.date-btn {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.date-btn:hover {
+    background-color: #0056b3;
+    color: #fff;
 }
 
 /* 폼 스타일 */
@@ -244,7 +341,7 @@ footer {
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
 
     main {

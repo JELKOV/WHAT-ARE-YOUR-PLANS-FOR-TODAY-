@@ -8,18 +8,23 @@
 </head>
 <body>
     <header>
-        <h1>To-Do List 어플리케이션</h1>
+        <h1>To-Do List</h1>
         <nav>
             <ul class="nav-menu">
-                <li><a href="{{ url_for('home') }}">홈</a></li>
-                <li><a href="{{ url_for('tasks.task_list') }}">할일</a></li>
-                <li><a href="{{ url_for('tasks.add_task') }}">할일 추가하기</a></li>
-            </ul>
-            <!-- 로그인/로그아웃 버튼 -->
             <div class="auth-buttons">
-                <a href="{{ url_for('auth.login') }}" class="btn-login">로그인</a>
-                <a href="{{ url_for('auth.logout') }}" class="btn-logout">로그아웃</a>
+                <a href="{{ url_for('home') }}" class="btn-home">Home</a>
+                <a href="{{ url_for('tasks.task_list') }}" class="btn-mytask">My Task</a>
+                <a href="{{ url_for('tasks.add_task') }}" class="btn-add">Add My Task</a>
+
+            <!-- 로그인/로그아웃 버튼 -->
+                {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.login') }}" class="btn-login">로그인</a>
+                    <a href="{{ url_for('auth.register') }}" class="btn-register">회원가입</a>
+                {% else %}
+                    <a href="{{ url_for('auth.logout') }}" class="btn-logout">로그아웃</a>
+                {% endif %}
             </div>
+            </ul>
         </nav>
     </header>
 

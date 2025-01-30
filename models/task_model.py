@@ -23,3 +23,12 @@ class Task(todo_db.Model):
     status = todo_db.Column(todo_db.String(20), default='pending')
     # ✅ 완료 여부 추가
     completed = todo_db.Column(todo_db.Boolean, default=False)
+
+    # 사용자 외래키 추가 (User 모델과 연결)
+    user_id = todo_db.Column(todo_db.Integer, todo_db.ForeignKey('users.id'), nullable=False)
+
+    # ✅ User 모델과 관계 설정 (각 Task는 하나의 User에 속함)
+    user = todo_db.relationship('User', backref='tasks', lazy=True)
+
+    def __repr__(self):
+        return f'<Task {self.title} (User ID: {self.user_id})>'

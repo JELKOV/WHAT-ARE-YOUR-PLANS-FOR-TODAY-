@@ -31,7 +31,13 @@ Edit Task - To-Do App
     </div>
     <div>
         {{ form.priority.label }}
-        {{ form.priority(min=1, max=5, class="form-control") }}
+        <div>
+            {% for subfield in form.priority %}
+                <label class="priority-label">
+                    {{ subfield.label.text }} <br> {{ subfield() }}
+                </label>
+            {% endfor %}
+        </div>
         {% if form.priority.errors %}
             <small class="error">{{ form.priority.errors[0] }}</small>
         {% endif %}
@@ -54,7 +60,7 @@ Edit Task - To-Do App
             Cancel
         </a>
         <button type="submit" class="btn btn-success btn-lg">
-            Save Changes
+            Save
         </button>
     </div>
 </form>

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField, DateField, SubmitField, BooleanField
+from wtforms import StringField, TextAreaField, RadioField, DateField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Optional
 
 class TaskForm(FlaskForm):
@@ -12,11 +12,22 @@ class TaskForm(FlaskForm):
     description = TextAreaField('설명', validators=[Optional()])
     # 카테고리 필드: 선택 입력 (카테고리를 지정하지 않아도 됨)
     category = StringField('카테고리', validators=[Optional()])
-    # 우선순위 필드: 선택 입력 (숫자 입력, 기본값은 1)
-    priority = IntegerField('우선순위(기본값은 1)', validators=[Optional()])
+    # ✅ 우선순위를 라디오 버튼으로 변경 (1~5 중 선택)
+    priority = RadioField(
+        '우선순위 선택',
+        choices=[
+            ('1', '매우 낮음'),
+            ('2', '낮음'),
+            ('3', '보통'),
+            ('4', '높음'),
+            ('5', '매우 높음')
+        ],
+        default='3',  # 기본값: 보통
+        validators=[DataRequired()]
+    )
     # 마감일 필드: 선택 입력 (YYYY-MM-DD 형식의 날짜)
     deadline = DateField('마감기일', format='%Y-%m-%d', validators=[Optional()])
     # 완료 여부
-    completed = BooleanField('완료 여부')  # ✅ 추가
+    completed = BooleanField('완료 여부')
     # 저장 버튼
     submit = SubmitField('저장 하기')

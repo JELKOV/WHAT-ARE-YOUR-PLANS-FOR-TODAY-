@@ -20,16 +20,23 @@ Add Task - To-Do App
         {{ form.category.label }}
         {{ form.category(size=40) }}
     </div>
-    <div>
+        <div>
         {{ form.priority.label }}
-        {{ form.priority(min=1, max=10) }}
+        <div>
+            {% for subfield in form.priority %}
+                <label class="priority-label">
+                   {{ subfield.label.text }} <br> {{ subfield() }}
+                </label>
+            {% endfor %}
+        </div>
     </div>
     <div>
         {{ form.deadline.label }}
-        {{ form.deadline() }}
+        {{ form.deadline(class="form-control") }}
     </div>
-    <div>
-        {{ form.submit(class="btn btn-primary") }}
+    <div class="d-flex justify-content-end gap-2 mt-4">
+        <a href="{{ url_for('tasks.task_list') }}" class="btn btn-danger btn-lg">Cancel</a>
+        <button type="submit" class="btn btn-success btn-lg">Save</button>
     </div>
 </form>
 {% endblock %}

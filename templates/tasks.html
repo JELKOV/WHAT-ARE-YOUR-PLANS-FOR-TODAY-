@@ -14,21 +14,32 @@ Tasks - To-Do App
 </div>
 
 <!-- 할일 목록 -->
-<ul>
+<ul class="task-list">
     {% for task in tasks %}
-        <li class="task-item">
-            <div class="task-info">
+        <li class="task-item
+                   {% if task.deadline and task.deadline.strftime('%Y-%m-%d') == current_date and not task.completed %}due-today{% endif %}">
+            <div class="task-content">
+                <!-- 체크박스 -->
                 <input type="checkbox" class="task-checkbox" data-task-id="{{ task.id }}" {% if task.completed %}checked{% endif %}>
-                <strong>{{ task.title }}</strong>
+
+                <!-- 할 일 제목 -->
+                <a href="{{ url_for('tasks.task_detail', task_id=task.id) }}" class="task-title">{{ task.title }}</a>
+
+                <!-- 마감 기일 표시 -->
+                <span class="task-deadline">
+                    🗓️ 마감: {{ task.deadline.strftime('%Y-%m-%d') if task.deadline else '설정 없음' }}
+                </span>
+
+                <!-- 진행 상태 -->
                 <span class="task-status">{% if task.completed %}✅ 완료됨{% else %}⏳ 진행 중{% endif %}</span>
             </div>
+
+            <!-- 작업 버튼 -->
             <div class="task-actions">
-                <!-- 수정 버튼 -->
-                <form action="{{ url_for('tasks.edit_task', task_id=task.id) }}" method="get">
+                <form action="{{ url_for('tasks.edit_task', task_id=task.id) }}" method="get" class="task-form">
                     <button type="submit" class="task-btn edit">수정</button>
                 </form>
-                <!-- 삭제 버튼 -->
-                <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="post">
+                <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="post" class="task-form">
                     <button type="submit" class="task-btn delete" onclick="return confirm('정말로 삭제하겠습니까?')">삭제</button>
                 </form>
             </div>

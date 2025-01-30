@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Task Detail - {{ task.title }}
+{% endblock %}
+
+{% block content %}
+<h2>할일 상세 보기</h2>
+
+<div class="task-detail-container">
+    <h3 class="task-title-detail">제목:{{ task.title }}</h3>
+
+    <p class="task-description-detail">
+        <strong>설명:</strong> {{ task.description if task.description else "설명이 없습니다." }}
+    </p>
+
+    <p class="task-category-detail">
+        <strong>카테고리:</strong> {{ task.category if task.category else "없음" }}
+    </p>
+
+    <p class="task-priority-detail">
+        <strong>우선순위:</strong>
+        {% if task.priority == 1 %}
+            🟢 매우 낮음
+        {% elif task.priority == 2 %}
+            🟡 낮음
+        {% elif task.priority == 3 %}
+            🔵 보통
+        {% elif task.priority == 4 %}
+            🟠 높음
+        {% elif task.priority == 5 %}
+            🔴 매우 높음
+        {% else %}
+            ❔ 설정 없음
+        {% endif %}
+    </p>
+
+    <p class="task-deadline-detail">
+        <strong>마감 기일:</strong> 🗓️ {{ task.deadline.strftime('%Y-%m-%d') if task.deadline else "설정 없음" }}
+    </p>
+
+    <p class="task-status-detail">
+        <strong>상태:</strong>
+        {% if task.completed %}
+            ✅ 완료됨
+        {% else %}
+            ⏳ 진행 중
+        {% endif %}
+    </p>
+
+    <div class="task-buttons-detail">
+        <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}" class="task-btn btn-edit">수정</a>
+
+        <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="post" class="task-detail-form">
+            <button type="submit" class="task-btn btn-delete" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+        </form>
+
+        <a href="{{ url_for('tasks.task_list') }}" class="task-btn btn-back">목록으로</a>
+    </div>
+</div>
+
+{% endblock %}

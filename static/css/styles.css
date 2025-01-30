@@ -1,4 +1,4 @@
-/* 기본 스타일 */
+/* ✅ 공통 스타일 */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -7,7 +7,7 @@ body {
     color: #333;
 }
 
-/* 헤더 스타일 */
+/* ✅ 헤더 스타일 */
 header {
     display: flex;
     justify-content: space-between;
@@ -21,6 +21,13 @@ header h1 {
     margin: 0;
     font-size: 1.5em; /* 텍스트 크기를 줄임 */
     white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: Arial, sans-serif;
+    color: #333;
 }
 
 .nav-menu {
@@ -48,7 +55,7 @@ header h1 {
 }
 
 
-/* 버튼 정렬 및 통일 */
+/* ✅ 버튼 스타일 */
 .d-flex {
     display: flex;
     justify-content: flex-end; /* 오른쪽 정렬 */
@@ -88,7 +95,7 @@ header h1 {
 }
 
 
-/* 로그인/로그아웃 버튼 스타일 */
+/* ✅ 로그인/로그아웃 버튼 */
 .auth-buttons {
     display: flex;
     gap: 10px;
@@ -121,7 +128,7 @@ header h1 {
     color: #fff;
 }
 
-/* 메인 컨텐츠 스타일 */
+/* ✅ 메인 컨텐츠 */
 main {
     max-width: 90%;
     margin: 20px auto;
@@ -131,63 +138,98 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 리스트 스타일 */
-ul {
+/* ✅ 리스트 스타일 */
+.task-list {
     list-style: none;
     padding: 0;
 }
 
-ul li.task-item {
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 10px;
+.task-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     background-color: #fefefe;
     transition: box-shadow 0.3s ease;
+    margin-bottom: 10px;
 }
 
-ul li.task-item:hover {
+.task-item:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 작업 정보 스타일 */
-.task-info {
+/* ✅ 할일 체크박스 + 내용 */
+.task-content {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
 }
 
-.task-info strong {
+/* 체크박스 */
+.task-checkbox {
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+/* 할일 제목 */
+.task-title {
+    flex-grow: 1;
     font-size: 1em;
     color: #333;
+    text-align: left;
 }
 
-.task-info .task-status {
+/* 마감 기일 스타일 */
+.task-deadline {
+    font-size: 0.9em;
+    color: #777;
+    margin-left: 10px;
+}
+
+/* 오늘 마감인 할일 반짝이게 */
+@keyframes blink {
+    0% { background-color: #ffeb3b; }
+    50% { background-color: #fff; }
+    100% { background-color: #ffeb3b; }
+}
+
+.due-today {
+    animation: blink 1s infinite alternate;
+    border: 2px solid #ff9800;
+}
+
+/* ✅ 완료된 항목은 반짝임 효과 제거 */
+.task-item.due-today .task-status:has(.task-checkbox:checked) {
+    animation: none;
+    opacity: 1;
+}
+
+/* 진행 상태 */
+.task-status {
     font-size: 0.9em;
     color: #555;
+    padding-right: 10px;
+    text-align: left;
 }
 
-/* 작업 버튼 스타일 */
+/* ✅ 작업 버튼 */
 .task-actions {
     display: flex;
-    gap: 10px; /* 버튼 간격 */
+    gap: 10px;
 }
 
 /* 공통 버튼 스타일 */
 .task-btn {
-    display: inline-block;
-    padding: 5px 15px; /* 버튼 크기를 균일하게 조정 */
+    padding: 8px 12px;
     border: none;
-    border-radius: 4px;
-    font-size: 0.9em;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9em;
     text-decoration: none;
-    color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 2px; /* 버튼 간의 간격 조정 */
+    transition: background-color 0.3s ease;
 }
 
 /* 수정 버튼 */
@@ -197,8 +239,8 @@ ul li.task-item:hover {
 }
 
 .task-btn.edit:hover {
-    background-color: #3e8e41; /* 더 어두운 녹색으로 변화 */
-    transform: scale(1.05); /* 살짝 커짐 */
+    background-color: #3e8e41;
+    transform: scale(1.05);
 }
 
 /* 삭제 버튼 */
@@ -208,11 +250,105 @@ ul li.task-item:hover {
 }
 
 .task-btn.delete:hover {
-    background-color: #d9534f; /* 어두운 빨간색으로 변화 */
-    transform: scale(1.05); /* 살짝 커짐 */
+    background-color: #d9534f;
+    transform: scale(1.05);
 }
 
-/* 추가 버튼 스타일 */
+/* 상세 페이지 컨테이너 */
+.task-detail-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 할일 제목 */
+.task-title-detail {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 설명 및 정보 스타일 */
+.task-description-detail,
+.task-category-detail,
+.task-deadline-detail,
+.task-status-detail {
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+/* ✅ 우선순위 스타일 */
+.task-priority-detail {
+    font-size: 1.1em;
+    margin: 10px 0;
+    font-weight: bold;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Detail 페이지 삭제버튼 폼 */
+.task-detail-form {
+    display: inline-block;
+    width: 13%;
+    margin: 0;
+    padding: 0;
+}
+
+/* ✅ 버튼이 균형 잡히도록 flex 정렬 */
+.task-buttons-detail {
+    display: flex;
+    gap: 15px; /* 버튼 간격 */
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center;
+}
+
+/* ✅ 모든 버튼 크기를 동일하게 조정 */
+.task-btn {
+    padding: 12px 20px; /* 패딩 균일 */
+    border-radius: 6px;
+    font-size: 1rem; /* 텍스트 크기 */
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* ✅ 버튼 색상 정의 */
+.btn-edit {
+    background-color: #28a745; /* 초록색 */
+    color: white;
+}
+
+.btn-delete {
+    background-color: #dc3545; /* 빨간색 */
+    color: white;
+}
+
+.btn-back {
+    background-color: #007BFF; /* 파란색 */
+    color: white;
+}
+
+/* ✅ 버튼 hover 효과 */
+.task-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+
+
+/* ✅ 폼 버튼 스타일 */
+.task-form {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+/* ✅ 추가 버튼 */
 .add-btn {
     display: inline-block;
     background-color: #4CAF50;
@@ -229,7 +365,7 @@ ul li.task-item:hover {
     background-color: #45a049;
 }
 
-/* 날짜 선택 버튼 스타일 */
+/* ✅ 날짜 선택 버튼 */
 .date-btn {
     padding: 8px 16px;
     background-color: #007BFF;
@@ -238,15 +374,14 @@ ul li.task-item:hover {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .date-btn:hover {
     background-color: #0056b3;
-    color: #fff;
 }
 
-/* 폼 스타일 */
+/* ✅ 폼 스타일 */
 form {
     max-width: 800px;
     width: 95%;
@@ -297,14 +432,8 @@ form button:hover {
     background-color: #0056b3;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-family: Arial, sans-serif;
-    color: #333;
-}
 
-/* 푸터 스타일 */
+/* ✅ 푸터 */
 footer {
     text-align: center;
     padding: 1rem 0;
@@ -316,7 +445,15 @@ footer {
     left: 0;
 }
 
-/* 반응형 레이아웃 */
+/* 라디오 버튼 */
+.priority-label {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 13px;
+}
+
+
+/* ✅ 반응형 스타일 */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
